@@ -1,0 +1,88 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+    <div class="form-inline">
+        <div class="panel-group" style="float: left;">
+            <div class="panel panel-info">
+                <div class="panel-heading">upload your photo here</div>
+                <div class="panel-body">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="img">Choose an image to upload:</label>
+                            <input type="file" class="form-control" placeholder="Upload your image." id="img"
+                                name="img">
+                        </div>
+                        <input type="submit" value="upload" name="upload">
+                    </form>
+                    check your image: <a href="{{ img.input_img.url }}" target="_blank">your image</a>
+                </div>
+            </div>
+            <br><br>
+            <div class="panel panel-info">
+                <div class="panel-heading">restore your image here</div>
+                <div class="panel-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="radio" id="oldphotorestoration" name="restore_type" value="oldphotorestoration">
+                        <label for="oldphotorestoration">Old Photo Restoration</label><br>
+                        <input type="radio" id="deraindrop" name="restore_type" value="deraindrop">
+                        <label for="deraindrop">DeRaindrop</label><br>
+                        <input type="radio" id="derain" name="restore_type" value="derain">
+                        <label for="derain">Derain</label><br>
+                        <input type="radio" id="dehaze" name="restore_type" value="dehaze">
+                        <label for="dehaze">Dehaze</label><br>
+                        <input type="submit" value="restore" name="restore">
+                    </form>
+                </div>
+                {% if restore_state %}
+                <div class="alert alert-success alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Restoration succeeded!</strong>
+                </div>
+                {% endif %}
+            </div>
+            <br><br>
+            <div class="panel panel-info">
+                <div class="panel-heading">view your restored image here</div>
+                <div class="panel-body">
+                    check the restored image: <a href="{{ img.output_img.url }}" target="_blank">restored image</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="form-inline">
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="img">Choose an image to upload:</label>
+            <input type="file" class="form-control" placeholder="Upload your image." id="img" name="img">
+        </div>
+        <input type="submit" value="upload" name="upload">
+    </form>
+
+    <a href="{{ img.input_img.url }}" target="_blank">your image</a>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="radio" id="oldphotorestoration" name="restore_type" value="oldphotorestoration">
+        <label for="oldphotorestoration">Old Photo Restoration</label><br>
+        <input type="radio" id="deraindrop" name="restore_type" value="deraindrop">
+        <label for="deraindrop">DeRaindrop</label><br>
+        <input type="radio" id="derain" name="restore_type" value="derain">
+        <label for="derain">Derain</label><br>
+        <input type="radio" id="dehaze" name="restore_type" value="dehaze">
+        <label for="dehaze">Dehaze</label><br>
+        <input type="submit" value="restore" name="restore">
+    </form>
+
+    <a href="{{ img.output_img.url }}" target="_blank">restored image</a>
+
+</div> -->
+
+{% endblock %}
+
+<br> 111 {{ img.input_img.name|slice:"12:" }}
+<br> 222 {{ img.output_img.name|slice:"13:" }}
